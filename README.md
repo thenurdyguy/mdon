@@ -14,7 +14,7 @@ Stupid simple inline markdown fields used by the Polyestr application framework.
 
 ## Getting Started
 
-mdone is still in it's infancy so you will have to install it from gist for now.
+mdon is still in it's infancy so you will have to install it from [gist](https://gist.github.com/daflair/d92ae1d4f54d7cb43a434388c6adabaf) for now.
 
 <?!>
 
