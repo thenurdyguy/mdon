@@ -1,14 +1,31 @@
 {
-    "name": "@polyestr/mdon",
+    "name": "mdon",
     "displayName": "Polyestr MDon",
     "glyph": "ΨM",
-    "version": "1.0.0-alpha.0",
+    "version": "1.0.0-alpha.3",
     "description": "Stupid simple inline markdown fields used by the Polyestr application framework.",
     "author": "Saleh Abdel Motaal <saleh@grasppe.com>",
     "license": "MIT",
     "main": "lib/index",
     "types": "lib/index.d.ts",
+    "repository": {
+        "url": "https://github.com/polyestr/mdon",
+        "type": "git"
+    },
     "bin": {
-        "mdon": "lib/index.js"
+        "mdon~": "lib/index.js",
+        "mdon": "lib/index.mjs"
+    },
+    "scripts": {
+        "md~": "lib/index.js",
+        "md": "lib/index.mjs",
+        "test-md~": "lib/index.js ./test/package -m README.md",
+        "test-md": "lib/index.mjs ./test/package -m README.md",
+        "test-glob-md~": "lib/index.js ./test/package ./test/package/*.md",
+        "test-glob-md": "lib/index.mjs ./test/package ./test/package/*.md",
+        "test-glob": "yarn run test-glob-md~ && yarn run test-glob-md",
+        "test-yarn": "cd ./test/package; yarn test-yarn-md; cd ../../",
+        "test": "yarn run test-md~ && yarn run test-md && yarn test-glob && yarn test-yarn",
+        "prepare": "yarn test && yarn md"
     }
 }
