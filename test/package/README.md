@@ -113,5 +113,5 @@ unintended mishaps.
 [asset-1]: ../../assets/logo.svg
 
 ---
-Last Updated: Thursday, October 19, 2017, 11:45:31 PM UTC
+Last Updated: Friday, October 20, 2017, 8:47:12 PM UTC
 <!--?!-->

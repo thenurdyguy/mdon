@@ -92,7 +92,8 @@ use the top package's JSON fields in place of the nest one.
 
 MDon is meant to be used from the command-line, however, you can still use it
 in your code through it's simple single-function interface which will process
-a single markdown file at a time (does not glob).
+a single markdown file at a time (does not glob) and returns an object with the
+`input` and `output` strings.
 
 ```js
   import mdon from 'mdon';
@@ -113,13 +114,13 @@ To process and write the file, mimicing the CLI's behavior:
 To capture the processed output after MDon writes the output:
 
 ```js
-  const processedMarkdown = mdon('<path/to/package>', '<path/to/DOCUMENT.md>');
+  const {output} = mdon('<path/to/package>', '<path/to/DOCUMENT.md>');
 ```
 
 To simply capture the processed output without writing the output:
 
 ```js
-  const processedMarkdown = mdon('<path/to/package>', '<path/to/DOCUMENT.md>', false);
+  const {output} = mdon('<path/to/package>', '<path/to/DOCUMENT.md>', false);
 ```
 
 To append a suffix to the name of the output file:
