@@ -9,11 +9,11 @@ declare const fs: any, path: any, define: {
         [s: string]: T;
     }): [string, T][];
     (o: any): [string, any][];
-}, prototypeOf: (o: any) => any, readFileSync: any, existsSync: any, writeFileSync: any, renameSync: any, resolve: any, dirname: any, basename: any, relative: any, parsePath: any, extname: any;
+}, prototypeOf: (o: any) => any, setPrototype: (o: any, proto: object) => any, readFileSync: any, existsSync: any, writeFileSync: any, renameSync: any, resolve: any, dirname: any, basename: any, relative: any, parsePath: any, extname: any;
 declare const defaults: {
-    output: boolean;
     backup: boolean;
     safe: boolean;
+    output: boolean;
 }, debugging: indexable<boolean>;
 declare const READ: symbol, PARSE: symbol, LINKS: symbol, matchers: {
     alias: RegExp;
@@ -39,11 +39,12 @@ declare const READ: symbol, PARSE: symbol, LINKS: symbol, matchers: {
         suffix: string;
         abort: boolean;
     };
+    invalidCallingContext: (method?: string) => Error;
+    invalidArgument: (method: string, argument: string, value: any, reason?: string) => Error;
 }, timestamp: Intl.DateTimeFormatOptions & {
     locale?: string;
 };
 declare const VOID: any, NOOP: (...args: any[]) => any, ANY: (type: any) => boolean, typeguard: (type: any, value: any, fallback: any) => any, callable: any, object: any, boolean: any, string: any, stdout: any, argv: any[], hrtime: any, columns: number, now: (t?: any) => number, bind: (object: any, ...methods: string[]) => void, normalizeAlias: (value: any) => any;
-/** Low-overhead (less secure) sandbox suitable for evaluating directives. */
 declare class Macro extends Function {
     directive: string;
     constructor(directive: string);
@@ -65,17 +66,21 @@ declare class Base {
 }
 declare class Context extends Base {
     path?: string;
+    src: string;
+    document?: indexable<any>;
+    wrappers: WeakMap<object, any>;
+    readonly cwd: any;
     constructor(properties: object, path: string);
+    wrap(wrapper?: object): any;
     $timestamp(date?: string | number | Date, {locale, ...options}?: indexable<any>): string;
     $format(string: string): string;
-    $resolve(path: string): string;
+    $resolve(path: string, base?: boolean | string): string;
     $exists(path: string): string;
     $include(path: string): string;
-    $parse(markdown: string): string;
+    $parse(markdown: string, context?: this): string;
     $alias(ref: string, prefix?: string): any;
     $ref(alias: string): any;
 }
-/** Exposes root, package.json fields, and file operations. */
 declare class Package extends Base {
     resolve: any;
     root: string;
@@ -89,7 +94,6 @@ declare class Package extends Base {
     }): any;
     backup(filename: string, i?: number): any;
 }
-/** Exposes normalize, fragment, parse, format, and print operations. */
 declare class Compiler extends Base {
     constructor();
     fragment(source: string): string[];

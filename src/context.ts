@@ -1,8 +1,15 @@
 class Context extends Base {
-    path?: string;
+    path?: string; src: string;
+    document?: indexable<any>;
+    wrappers = new WeakMap();
+
+    get cwd() {
+        return dirname(string(this.src || this.path, ''));
+    }
 
     constructor(properties: object, path: string) {
-        super(); define(this, properties, { path });
+        super();
+        define(this, properties, { path }); // cwd: string(path) && dirname(path) || ''
         this[LINKS] = {
             refs: {}, aliases: {}, length: 0, toString() {
                 const entries = this.length && entriesOf(this.refs), result = [];
@@ -12,6 +19,16 @@ class Context extends Base {
             }
         };
     }
+
+    wrap(wrapper?: object) {
+        const ƒ = 'Context#wrap', { $: context, $: { wrap: ƒwrap, wrappers } } = this;
+        if ((wrapper = object(wrapper)) && !object.flat(wrapper)) throw errors.invalidArgument(ƒ, 'wrapper', wrapper, 'which should be a flat object.');
+        else if (ƒwrap !== Context.prototype.wrap || !object(wrappers) || wrappers.constructor !== WeakMap) throw errors.invalidCallingContext(ƒ);
+        let wrapped = wrappers.get(wrapper = wrapper || {});
+        if (!wrapped) wrappers.set(wrapper, wrapped = setPrototype(wrapper, context));
+        return wrapped;
+    }
+
     $timestamp(date?: string | number | Date, { locale, ...options }: indexable<any> = timestamp) {
         return ((date && (date > 0 || string(date) ? new Date(date as any) : object(date)) || new Date()) as Date).toLocaleString(string(locale, timestamp.locale), options);
     }
@@ -19,22 +36,26 @@ class Context extends Base {
         let type = typeof string;
         return type === 'string' || type === 'number' || type === 'boolean' ? `${string}` : `<!-- \`${string}\` -->`
     }
-    $resolve(path: string) {
-        if (!existsSync(path = resolve(this.path, `./${path}`))) throw Error(`The resolved path "${path}" for the specified path "${arguments[0]}" does not exist.`);
+
+    $resolve(path: string, base?: boolean | string) {
+        base = string((base === true || /^\.\//.test(path)) && this.cwd || this.path);
+        // console.log(`resolve(${[...arguments].join(', ')}) from ${base}`);
+        if (!existsSync(path = resolve(base, `./${string(path, '')}`))) throw Error(`The resolved path "${path}" for the specified path "${arguments[0]}" does not exist.`);
         return path;
     }
     $exists(path: string) {
         return this.$format(relative(this.path, this.$resolve(path)));
     }
     $include(path: string) {
-        const content = this[READ](this.$resolve(path));
-        // if (path) throw Error(`Not a real error!`);
+        const content = this[READ](path = this.$resolve(path)).trim();
+        // console.log(`include(${[...arguments].join(', ')}) [${path}]: ${content}`);
         return matchers.fragments.test(content)
-            ? this.$parse(content)
+            ? this.$parse(content, this.wrap({ src: path, document: parsePath(path) }))
             : this.$format(content)
     }
-    $parse(markdown: string) {
-        return this.$format(this[PARSE](this, markdown, false));
+
+    $parse(markdown: string, context = this) {
+        return this.$format(this[PARSE](context, markdown, false));
     }
     $alias(ref: string, prefix = 'link') {
         if (!(ref = string(ref, '').trim())) throw Error(`Cannot create alias from reference: ${arguments[0]}`);

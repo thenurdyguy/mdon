@@ -1,14 +1,15 @@
 /* Imports */
 const fs = require('fs'), path = require('path'),
-    { assign: define, entries: entriesOf, getPrototypeOf: prototypeOf } = Object,
+    { assign: define, entries: entriesOf, getPrototypeOf: prototypeOf, setPrototypeOf: setPrototype } = Object,
     { readFileSync, existsSync, writeFileSync, renameSync } = fs,
     { resolve, dirname, basename, relative, parse: parsePath, extname } = path;
 
 /* Settings */
 const defaults = {
-    output: true, // false returns output, '.suffix' writes to <name>.suffix.md
-    backup: false, safe: true
-}, debugging = ['', { parse: true, fragments: false, sprint: true, output: true }][+false] as any as indexable<boolean | undefined>;
+    backup: false, safe: true, output: true, // false returns output, '.suffix' writes to <name>.suffix.md
+}, debugging = (''
+    //, { parse: true, fragments: false, sprint: true, output: true }
+) as any as indexable<boolean | undefined>;
 
 /* Definitions */
 const [READ, PARSE, LINKS] = ['READ', 'PARSE', 'LINKS'].map(Symbol), // Symbol('MDon::Links'),
@@ -28,6 +29,8 @@ const [READ, PARSE, LINKS] = ['READ', 'PARSE', 'LINKS'].map(Symbol), // Symbol('
     errors = {
         alreadySuffixed: (filename: string, suffix: string, abort = true, reason = `filename "${filename}" already includes the suffix "${suffix}"`) => define(Error(`MDon compiler cannot process a file if ${reason}.`), { reason, filename, suffix, abort }),
         invalidSuffix: (suffix: string, abort = true, reason = `suffix "${suffix}" is unsupported`) => define(Error(`The ${reason} — MDon only supports suffixes that start with a "." and do not include spaces, dots or any path-related characters.`), { reason, suffix, abort }),
+        invalidCallingContext: (method = 'Callee') => Error(`${method} cannot be called on "this" context (unsupported inheritance or Function#<bind|call|apply> use).`),
+        invalidArgument: (method = 'Callee', argument = 'argument', value, reason = ` = ${value}`) => Error(`${method} does not support ${argument} ${reason}.`),
     },
     timestamp: Intl.DateTimeFormatOptions & { locale?: string } = {
         locale: 'en-US', timeZone: 'GMT', timeZoneName: 'short',
@@ -42,7 +45,11 @@ const
     ANY = (type: any) => type !== 'undefined',
     typeguard = (type: any, value: any, fallback: any) => typeof value === type ? value : fallback, // type.includes(typeof value)
     callable = typeguard.bind(null, 'function'),
-    object = typeguard.bind(null, 'object'),
+    object = define(
+        typeguard.bind(null, 'object'),
+        {
+            flat: (value, fallback: any) => typeof value === 'object' && [Object.prototype, null].includes(prototypeOf(value)) ? value : fallback
+        }),
     boolean = typeguard.bind(null, 'boolean'),
     string = typeguard.bind(null, 'string'),
     { stdout, argv = [], hrtime } = ANY(typeof process) ? process : VOID,

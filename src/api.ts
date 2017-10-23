@@ -27,7 +27,7 @@ function mdon(pkgpath: string = '', mdpath: any = './README.md' as any, outpath:
     const [, yaml = '', md = mdin] = /^(---\n.*?\n---\n|)((?:.*?\n?)*)$/.exec(mdin) || '';
 
     const { parse, pretty, log } = new Compiler(), started = now();
-    const context = new Context({ ...info, [READ]: read, [PARSE]: parse }, root);
+    const context = new Context({ ...info, [READ]: read, [PARSE]: parse, document: parsePath(mdpath.resolved), src: mdpath.resolved }, root); // cwd: dirname(mdpath.resolved)
     let mdout = (parse(context, md) || '');
     const elapsed = now() - started;
 
