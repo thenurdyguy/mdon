@@ -16,6 +16,7 @@
         "md~": "mdon~ *.md",
         "md": "mdon *.md",
         "md-out": "mdon *.md .out && rimraf *.out.md",
-        "test-yarn-md": "yarn reinstall && yarn md~ && yarn md && yarn md-out"
+        "mdapi": "node index.js",
+        "test-yarn-md": "yarn reinstall && yarn md~ && yarn md && yarn md-out && yarn mdapi"
     }
 }

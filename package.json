@@ -25,6 +25,7 @@
         "test-glob-md": "lib/index.mjs ./test/package ./test/package/*.md",
         "test-glob": "yarn run test-glob-md~ && yarn run test-glob-md",
         "test-yarn": "cd ./test/package; yarn test-yarn-md; cd ../../",
+        "test-api": "cd ./test/package; yarn mdapi; cd ../../",
         "test": "yarn run test-md~ && yarn run test-md && yarn test-glob && yarn test-yarn",
         "build": "tsc",
         "prepare": "yarn build && yarn test && yarn md"
