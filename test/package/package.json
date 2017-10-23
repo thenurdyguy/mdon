@@ -8,15 +8,15 @@
     "author": "Saleh Abdel Motaal <saleh@grasppe.com>",
     "license": "MIT",
     "dependencies": {
-        "mdon": "../../",
-        "rimraf": "^2.6.2"
+        "mdon": "../../"
     },
     "scripts": {
-        "reinstall": "rimraf node_modules && yarn install",
+        "reinstall": "rm -Rf node_modules && yarn install",
         "md~": "mdon~ *.md",
         "md": "mdon *.md",
-        "md-out": "mdon *.md .out && rimraf *.out.md",
-        "mdapi": "node index.js",
-        "test-yarn-md": "yarn reinstall && yarn md~ && yarn md && yarn md-out && yarn mdapi"
+        "md-out": "mdon *.md .out && rm -f *.out.md",
+        "test-api": "node index.js",
+        "test-yarn": "yarn md~ && yarn md && yarn md-out",
+        "test-all": "yarn reinstall && yarn test-yarn && yarn test-api"
     }
 }
