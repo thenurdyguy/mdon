@@ -2,7 +2,7 @@
 
 (new class CLI extends Base {
     bootstrap(args?: string[]) {
-        if (!args) return;
+        if (!(object(args) && args.length >= 0)) return;
         const started = now();
         const options = { p: '', m: [], o: null, b: null },
             push = (k, arg) => options[k].push ? options[k].push(arg) : options[k] = arg, // !options[k] || options[k] === true && (options[k] = arg),
