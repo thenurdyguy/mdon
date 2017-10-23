@@ -1,27 +1,21 @@
-<!--@docs/README.1.md@-->
-<!--? `\n![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]\n` ?-->
-
+<!--%docs/README.1.md%-->
+<!--	*** THIS FILE IS DYNAMICALLY GENERATED ***	-->
+<!--? `![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]` ?-->
 ![Polyestr MDon Test logo][asset-1]
-
 <!--?!-->
 
-<!--? `\n# ${displayName}\n` ?-->
-
+<!--? `# ${displayName}` ?-->
 # Polyestr MDon Test
-
 <!--?!-->
 
-<!--? `\n${description}\n` ?-->
-
+<!--? `${description}` ?-->
 Test package for the stupid simple inline markdown fields used by the Polyestr application framework.
-
 <!--?!-->
 
 <!--? ?-->
 <!--?!-->
 
-<!--? `\n### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?-->
-
+<!--? `### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?-->
 ### Concepts
 
 > *Fragments*
@@ -86,7 +80,6 @@ unintended mishaps.
   and hack away, that's better than flooding your code with plugins.
 
   3. MDon likes to put things in multiples of 3, you know, a-b-c, 1-2-3.
-
 <!--?!-->
 
 <!--? ?-->
@@ -97,5 +90,5 @@ unintended mishaps.
 [asset-1]: ../../assets/logo.svg
 
 ---
-Last Updated: Friday, October 20, 2017, 8:47:12 PM UTC
+Last Updated: Monday, October 23, 2017, 9:52:08 PM UTC
 <!--?!-->

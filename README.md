@@ -1,17 +1,18 @@
-<!--@docs/README.md@-->
+<!--%docs/README.md%-->
+<!--	*** THIS FILE IS DYNAMICALLY GENERATED ***	-->
 <!--? `![${displayName} logo][${@alias('https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg', 'asset')}]` ?-->
-![Polyestr MDon logo][asset-1]
+![MDon logo][asset-1]
 <!--?!-->
 
 <!--? `# ${displayName}` ?-->
-# Polyestr MDon
+# MDon
 <!--?!-->
 
 <!--? `${description}` ?-->
 Stupid simple inline markdown fields used by the Polyestr application framework.
 <!--?!-->
 
-<!--? `${@include('docs/FEATURES.md')}` ?-->
+<!--? `${@include('./FEATURES.md')}` ?-->
 ## Features
 
 * Hackable, zero-dependency, fast, lightweight (so nothing new).
@@ -23,13 +24,14 @@ Stupid simple inline markdown fields used by the Polyestr application framework.
 * Simple but elegant fault-tolerance to prevent malformed output.
 * Doesn't mess with your YAML frontmatter!
 * Works like a swiss-army knife instead of a shop - 3 concepts to get started.
-
 <!--?!-->
 
 <!--? ?-->
 **Note:** MDon is still highly experimental and is not yet cross-platform
 enabled, so if you managed to use it on Windows or Linux or worked-out quirks,
 please submit an issue, not a PR at this point, but feel free to gist.
+
+*Stay up-to-date by checking the [changelog](CHANGELOG.md).*
 <!--?!-->
 
 <!--? `## Installation\n\n    » yarn add ${name}` ?-->
@@ -38,7 +40,7 @@ please submit an issue, not a PR at this point, but feel free to gist.
     » yarn add mdon
 <!--?!-->
 
-<!--? `${@include('docs/USAGE.md')}` ?-->
+<!--? `${@include('./USAGE.md')}` ?-->
 ## CLI
 
 MDon provides a CLI which is intended for use with scripts defined in your local
@@ -175,10 +177,9 @@ To process the file and write the output to a different file (work in progress, 
 ```js
   mdon('<path/to/package>', '<path/to/DOCUMENT.md>', '<path/to/OUTPUT.md>');
 ```
-
 <!--?!-->
 
-<!--? `\n\n---\n\n${@include('docs/CONCEPTS.md')}` ?-->
+<!--? `\n\n---\n\n${@include('./CONCEPTS.md')}` ?-->
 
 ---
 
@@ -236,7 +237,17 @@ unintended mishaps.
   MDon takes care of anyway, but honestly is `` `${displayName} ${version}` ``
   not good enought already… MDon always asks himself that question.
 
-## Perks
+## Latest Perks
+
+> **Experimental Relative Paths:**
+>
+> Starting from v1.0.0-alpha.6 you may use relative paths to any operation which
+will be resolved relative to the path of the markdown file they appear in. So in
+stead of using absolute paths, you can now ``<?`${@include('./OTHER.md')}`?>``
+to include it from the folder of the document your are authoring, similar to how
+relative ES modules and CSS imports work. Of course, unlike ES modules if your
+path does not begin with a './' it will actually be resolved relative to the
+root of your project not your `node_modules`!
 
 > **Using Raw "Source" Paths:**
 >
@@ -244,10 +255,18 @@ unintended mishaps.
 to separate source files from compiled files, which is not a requirement for
 MDon since it can recompile from compiled files but may still be a more robust
 setup in case something goes wrong. To opt in to this behaviour the first line
-of the target file needs to be begin with `<!--@path/to/source.md@-->`.
+of the target file needs to be begin with `<!--%path/to/source.md%-->`.
 >
 > So if you want your `./README.md` to compile from `./docs/README.md` then you
-can simply create a blank `./README.md` and set the first line to `<!--@docs/README.md-->`.
+can simply create a blank `./README.md` and set the first line to `<!--%docs/README.md%-->`.
+
+> **Safe Output by Default:**
+>
+> At the moment some package managers are working on fixes for misinterpretting
+syntax that should normally not be visible when rendering markdown content on
+their websites, so by default MDon will wrap fragments with `<!--…-->` in all
+files. In the future this will only be the default behaviour for files declaring
+a raw source like `<!--%docs/README.md%-->`.
 
 ## Gotchas
 
@@ -259,10 +278,9 @@ can simply create a blank `./README.md` and set the first line to `<!--@docs/REA
   and hack away, that's better than flooding your code with plugins.
 
   3. MDon likes to put things in multiples of 3, you know, a-b-c, 1-2-3.
-
 <!--?!-->
 
-<!--? `\n\n---\n${@include('docs/FAQ.md')}` ?-->
+<!--? `\n\n---\n${@include('./FAQ.md')}` ?-->
 
 ---
 ## FAQ
@@ -293,12 +311,11 @@ dropped even after manually putting it back?
 >
 > > **A:** This is a good time to file an issue so we can figure out where MDon can
 evolve to meet your practical needs.
-
 <!--?!-->
 
 <!--?!?-->
 [asset-1]: https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg
 
 ---
-Last Updated: Friday, October 20, 2017, 8:47:13 PM UTC
+Last Updated: Monday, October 23, 2017, 9:52:10 PM UTC
 <!--?!-->

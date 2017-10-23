@@ -1,6 +1,6 @@
 {
     "name": "mdon",
-    "displayName": "Polyestr MDon",
+    "displayName": "MDon",
     "glyph": "ΨM",
     "version": "1.0.0-alpha.5",
     "description": "Stupid simple inline markdown fields used by the Polyestr application framework.",
@@ -17,16 +17,19 @@
         "mdon": "lib/index.mjs"
     },
     "scripts": {
-        "md~": "lib/index.js",
-        "md": "lib/index.mjs",
-        "test-md~": "lib/index.js ./test/package -m README.md",
-        "test-md": "lib/index.mjs ./test/package -m README.md",
-        "test-glob-md~": "lib/index.js ./test/package ./test/package/*.md",
-        "test-glob-md": "lib/index.mjs ./test/package ./test/package/*.md",
+        "md~": "mdon~ *.md",
+        "md": "mdon *.md",
+        "test-md~": "mdon~ ./test/package -m README.md",
+        "test-md": "mdon ./test/package -m README.md",
+        "test-glob-md~": "mdon~ ./test/package ./test/package/*.md",
+        "test-glob-md": "mdon ./test/package ./test/package/*.md",
         "test-glob": "yarn run test-glob-md~ && yarn run test-glob-md",
-        "test-yarn": "cd ./test/package; yarn test-yarn-md; cd ../../",
-        "test": "yarn run test-md~ && yarn run test-md && yarn test-glob && yarn test-yarn",
-        "prepare": "yarn test && yarn md"
+        "test-package": "pushd ./test/package; yarn test-all; popd",
+        "test-package-yarn": "pushd ./test/package; yarn test-yarn; popd",
+        "test-package-api": "pushd ./test/package; yarn test-api; popd",
+        "test": "yarn run test-md~ && yarn run test-md && yarn test-glob && yarn test-package",
+        "build": "tsc",
+        "prepare": "yarn build && yarn test && yarn md"
     },
     "keywords": [
         "markdown",

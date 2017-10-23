@@ -52,7 +52,17 @@ unintended mishaps.
   MDon takes care of anyway, but honestly is `` `${displayName} ${version}` ``
   not good enought already… MDon always asks himself that question.
 
-## Perks
+## Latest Perks
+
+> **Experimental Relative Paths:**
+>
+> Starting from v1.0.0-alpha.6 you may use relative paths to any operation which
+will be resolved relative to the path of the markdown file they appear in. So in
+stead of using absolute paths, you can now ``<?`${@include('./OTHER.md')}`?>``
+to include it from the folder of the document your are authoring, similar to how
+relative ES modules and CSS imports work. Of course, unlike ES modules if your
+path does not begin with a './' it will actually be resolved relative to the
+root of your project not your `node_modules`!
 
 > **Using Raw "Source" Paths:**
 >
@@ -60,10 +70,18 @@ unintended mishaps.
 to separate source files from compiled files, which is not a requirement for
 MDon since it can recompile from compiled files but may still be a more robust
 setup in case something goes wrong. To opt in to this behaviour the first line
-of the target file needs to be begin with `<!--@path/to/source.md@-->`.
+of the target file needs to be begin with `<!--%path/to/source.md%-->`.
 >
 > So if you want your `./README.md` to compile from `./docs/README.md` then you
-can simply create a blank `./README.md` and set the first line to `<!--@docs/README.md-->`.
+can simply create a blank `./README.md` and set the first line to `<!--%docs/README.md%-->`.
+
+> **Safe Output by Default:**
+>
+> At the moment some package managers are working on fixes for misinterpretting
+syntax that should normally not be visible when rendering markdown content on
+their websites, so by default MDon will wrap fragments with `<!--…-->` in all
+files. In the future this will only be the default behaviour for files declaring
+a raw source like `<!--%docs/README.md%-->`.
 
 ## Gotchas
 

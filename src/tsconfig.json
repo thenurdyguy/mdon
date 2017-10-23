@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "esnext", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
+        "noEmit": true, /* Do not emit outputs. */
+        "checkJs": false,
+        "allowJs": false,
+        "allowSyntheticDefaultImports": true,
+        "rootDir": "."
+    },
+    "files": [
+        "types.d.ts",
+        "definitions.ts",
+        "prototypes.ts",
+        "macro.ts",
+        "base.ts",
+        "context.ts",
+        "package.ts",
+        "compiler.ts",
+        "api.ts",
+        "cli.ts",
+        "index.ts",
+        "exports.d.ts"
+    ]
+}
