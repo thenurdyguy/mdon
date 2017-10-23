@@ -32,7 +32,7 @@ function mdon(pkgpath: string = '', mdpath: any = './README.md' as any, outpath:
     const elapsed = now() - started;
 
     if (defaults.safe || mdpath.raw) mdout = mdout.replace(matchers.shorttags, '<!--$1-->');
-    mdout = (defaults.safe ? '' : yaml) + (mdpath.raw ? `<!--%${mdpath.raw}%-->\n${mdout.replace(/^<\!--(\@.*?\@|\$.*?\$)-->\n?/mg, '')}` : mdout);
+    mdout = (defaults.safe ? '' : yaml) + (mdpath.raw ? `<!--%${mdpath.raw}%-->\n<!--\t*** THIS FILE IS DYNAMICALLY GENERATED ***\t-->\n${mdout.replace(/^<\!--(\@.*?\@|\$.*?\$)-->\n?/mg, '')}` : mdout);
     outpath && write(mdpath.out = outpath, mdout), log.print(pretty(mdout, outpath)); // log(`MDon: ${mdpath.path} done in ${elapsed.toFixed(1)} ms`); // console.log({ mdpath, rawpath, outpath });
 
     return { output: mdout, input: mdin, path: mdpath as Path, elapsed };
