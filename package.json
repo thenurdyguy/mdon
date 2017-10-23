@@ -17,12 +17,12 @@
         "mdon": "lib/index.mjs"
     },
     "scripts": {
-        "md~": "lib/index.js",
-        "md": "lib/index.mjs",
-        "test-md~": "lib/index.js ./test/package -m README.md",
-        "test-md": "lib/index.mjs ./test/package -m README.md",
-        "test-glob-md~": "lib/index.js ./test/package ./test/package/*.md",
-        "test-glob-md": "lib/index.mjs ./test/package ./test/package/*.md",
+        "md~": "mdon~ *.md",
+        "md": "mdon *.md",
+        "test-md~": "mdon~ ./test/package -m README.md",
+        "test-md": "mdon ./test/package -m README.md",
+        "test-glob-md~": "mdon~ ./test/package ./test/package/*.md",
+        "test-glob-md": "mdon ./test/package ./test/package/*.md",
         "test-glob": "yarn run test-glob-md~ && yarn run test-glob-md",
         "test-yarn": "cd ./test/package; yarn test-yarn-md; cd ../../",
         "test-api": "cd ./test/package; yarn mdapi; cd ../../",
