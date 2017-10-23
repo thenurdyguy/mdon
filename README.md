@@ -1,4 +1,5 @@
 <!--%docs/README.md%-->
+<!--	*** THIS FILE IS DYNAMICALLY GENERATED ***	-->
 <!--? `![${displayName} logo][${@alias('https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg', 'asset')}]` ?-->
 ![MDon logo][asset-1]
 <!--?!-->
@@ -29,6 +30,8 @@ Stupid simple inline markdown fields used by the Polyestr application framework.
 **Note:** MDon is still highly experimental and is not yet cross-platform
 enabled, so if you managed to use it on Windows or Linux or worked-out quirks,
 please submit an issue, not a PR at this point, but feel free to gist.
+
+*Stay up-to-date by checking the [changelog](CHANGELOG.md).*
 <!--?!-->
 
 <!--? `## Installation\n\n    » yarn add ${name}` ?-->
@@ -234,7 +237,17 @@ unintended mishaps.
   MDon takes care of anyway, but honestly is `` `${displayName} ${version}` ``
   not good enought already… MDon always asks himself that question.
 
-## Perks
+## Latest Perks
+
+> **Experimental Relative Paths:**
+>
+> Starting from v1.0.0-alpha.6 you may use relative paths to any operation which
+will be resolved relative to the path of the markdown file they appear in. So in
+stead of using absolute paths, you can now ``<?`${@include('./OTHER.md')}`?>``
+to include it from the folder of the document your are authoring, similar to how
+relative ES modules and CSS imports work. Of course, unlike ES modules if your
+path does not begin with a './' it will actually be resolved relative to the
+root of your project not your `node_modules`!
 
 > **Using Raw "Source" Paths:**
 >
@@ -304,5 +317,5 @@ evolve to meet your practical needs.
 [asset-1]: https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg
 
 ---
-Last Updated: Monday, October 23, 2017, 4:49:32 PM UTC
+Last Updated: Monday, October 23, 2017, 9:52:10 PM UTC
 <!--?!-->

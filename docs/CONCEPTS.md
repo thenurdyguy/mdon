@@ -52,7 +52,17 @@ unintended mishaps.
   MDon takes care of anyway, but honestly is `` `${displayName} ${version}` ``
   not good enought already… MDon always asks himself that question.
 
-## Perks
+## Latest Perks
+
+> **Experimental Relative Paths:**
+>
+> Starting from v1.0.0-alpha.6 you may use relative paths to any operation which
+will be resolved relative to the path of the markdown file they appear in. So in
+stead of using absolute paths, you can now ``<?`${@include('./OTHER.md')}`?>``
+to include it from the folder of the document your are authoring, similar to how
+relative ES modules and CSS imports work. Of course, unlike ES modules if your
+path does not begin with a './' it will actually be resolved relative to the
+root of your project not your `node_modules`!
 
 > **Using Raw "Source" Paths:**
 >
