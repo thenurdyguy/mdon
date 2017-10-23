@@ -10,7 +10,7 @@
 <? `${description}` ?>
 <?!>
 
-<? `${@include('docs/FEATURES.md')}` ?>
+<? `${@include('./FEATURES.md')}` ?>
 <?!>
 
 <? ?>
@@ -22,11 +22,11 @@ please submit an issue, not a PR at this point, but feel free to gist.
 <? `## Installation\n\n    » yarn add ${name}` ?>
 <?!>
 
-<? `${@include('docs/USAGE.md')}` ?>
+<? `${@include('./USAGE.md')}` ?>
 <?!>
 
-<? `\n\n---\n\n${@include('docs/CONCEPTS.md')}` ?>
+<? `\n\n---\n\n${@include('./CONCEPTS.md')}` ?>
 <?!>
 
-<? `\n\n---\n${@include('docs/FAQ.md')}` ?>
+<? `\n\n---\n${@include('./FAQ.md')}` ?>
 <?!>

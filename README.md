@@ -1,17 +1,17 @@
 <!--%docs/README.md%-->
 <!--? `![${displayName} logo][${@alias('https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg', 'asset')}]` ?-->
-![Polyestr MDon logo][asset-1]
+![MDon logo][asset-1]
 <!--?!-->
 
 <!--? `# ${displayName}` ?-->
-# Polyestr MDon
+# MDon
 <!--?!-->
 
 <!--? `${description}` ?-->
 Stupid simple inline markdown fields used by the Polyestr application framework.
 <!--?!-->
 
-<!--? `${@include('docs/FEATURES.md')}` ?-->
+<!--? `${@include('./FEATURES.md')}` ?-->
 ## Features
 
 * Hackable, zero-dependency, fast, lightweight (so nothing new).
@@ -23,7 +23,6 @@ Stupid simple inline markdown fields used by the Polyestr application framework.
 * Simple but elegant fault-tolerance to prevent malformed output.
 * Doesn't mess with your YAML frontmatter!
 * Works like a swiss-army knife instead of a shop - 3 concepts to get started.
-
 <!--?!-->
 
 <!--? ?-->
@@ -38,7 +37,7 @@ please submit an issue, not a PR at this point, but feel free to gist.
     » yarn add mdon
 <!--?!-->
 
-<!--? `${@include('docs/USAGE.md')}` ?-->
+<!--? `${@include('./USAGE.md')}` ?-->
 ## CLI
 
 MDon provides a CLI which is intended for use with scripts defined in your local
@@ -175,10 +174,9 @@ To process the file and write the output to a different file (work in progress, 
 ```js
   mdon('<path/to/package>', '<path/to/DOCUMENT.md>', '<path/to/OUTPUT.md>');
 ```
-
 <!--?!-->
 
-<!--? `\n\n---\n\n${@include('docs/CONCEPTS.md')}` ?-->
+<!--? `\n\n---\n\n${@include('./CONCEPTS.md')}` ?-->
 
 ---
 
@@ -267,10 +265,9 @@ a raw source like `<!--%docs/README.md%-->`.
   and hack away, that's better than flooding your code with plugins.
 
   3. MDon likes to put things in multiples of 3, you know, a-b-c, 1-2-3.
-
 <!--?!-->
 
-<!--? `\n\n---\n${@include('docs/FAQ.md')}` ?-->
+<!--? `\n\n---\n${@include('./FAQ.md')}` ?-->
 
 ---
 ## FAQ
@@ -301,12 +298,11 @@ dropped even after manually putting it back?
 >
 > > **A:** This is a good time to file an issue so we can figure out where MDon can
 evolve to meet your practical needs.
-
 <!--?!-->
 
 <!--?!?-->
 [asset-1]: https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg
 
 ---
-Last Updated: Monday, October 23, 2017, 11:56:30 AM UTC
+Last Updated: Monday, October 23, 2017, 4:49:32 PM UTC
 <!--?!-->
