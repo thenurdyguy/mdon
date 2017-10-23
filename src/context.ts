@@ -32,6 +32,7 @@ class Context extends Base {
     $timestamp(date?: string | number | Date, { locale, ...options }: indexable<any> = timestamp) {
         return ((date && (date > 0 || string(date) ? new Date(date as any) : object(date)) || new Date()) as Date).toLocaleString(string(locale, timestamp.locale), options);
     }
+
     $format(string: string) {
         let type = typeof string;
         return type === 'string' || type === 'number' || type === 'boolean' ? `${string}` : `<!-- \`${string}\` -->`
@@ -43,9 +44,11 @@ class Context extends Base {
         if (!existsSync(path = resolve(base, `./${string(path, '')}`))) throw Error(`The resolved path "${path}" for the specified path "${arguments[0]}" does not exist.`);
         return path;
     }
+
     $exists(path: string) {
         return this.$format(relative(this.path, this.$resolve(path)));
     }
+
     $include(path: string) {
         const content = this[READ](path = this.$resolve(path)).trim();
         // console.log(`include(${[...arguments].join(', ')}) [${path}]: ${content}`);
@@ -57,6 +60,7 @@ class Context extends Base {
     $parse(markdown: string, context = this) {
         return this.$format(this[PARSE](context, markdown, false));
     }
+
     $alias(ref: string, prefix = 'link') {
         if (!(ref = string(ref, '').trim())) throw Error(`Cannot create alias from reference: ${arguments[0]}`);
         else if (!(prefix = normalizeAlias(prefix))) throw Error(`Cannot create alias from reference: ${arguments[0]} with prefix: ${arguments[1]}`);
@@ -67,6 +71,7 @@ class Context extends Base {
         }
         return alias;
     }
+
     $ref(alias: string) {
         if (!(alias = normalizeAlias(alias))) throw Error(`Cannot create reference from alias: ${arguments[0]}`);
         const { [LINKS]: { refs: { [alias]: ref } } } = this;

@@ -38,11 +38,8 @@ class Compiler extends Base {
         }
         root && output.push(`\n\n<?!?>\n${context[LINKS]}\n---\nLast Updated: ${context.$timestamp()}\n<?!>\n`);
         if (problems.length) {
-            for (const { fragment, index, exception, exception: { name, message } = '' as any } of problems) { // : { name, message, stack }
-                // this.warn({ ...exception, message: this.pretty(fragment, exception.message, index) });
+            for (const { fragment, index, exception, exception: { name, message } = '' as any } of problems)
                 this.warn(define(Error(''), exception, { message: '\n' + this.pretty(fragment, message, index, name) }));
-                // this.warn(exception, this.pretty(fragment, '', index));
-            }
         }
         return this.normalize(output.join(''));
     }

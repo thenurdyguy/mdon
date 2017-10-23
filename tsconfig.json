@@ -8,7 +8,8 @@
         "allowSyntheticDefaultImports": true,
         "outFile": "./lib/mdon.js",
         "declaration": true,
-        "rootDir": "./src"
+        "rootDir": "./src",
+        "removeComments": true
     },
     "exclude": [
         "lib/*.*"
