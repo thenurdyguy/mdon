@@ -8,7 +8,7 @@
     "author": "Saleh Abdel Motaal <saleh@grasppe.com>",
     "license": "MIT",
     "dependencies": {
-        "@polyestr/mdon": "../../",
+        "mdon": "../../",
         "rimraf": "^2.6.2"
     },
     "scripts": {
