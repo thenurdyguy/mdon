@@ -1,20 +1,14 @@
-<!--@docs/README.md@-->
-<!--? `\n![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]\n` ?-->
-
+<!--%docs/README.md%-->
+<!--? `![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]` ?-->
 ![Polyestr MDon Test logo][asset-1]
-
 <!--?!-->
 
-<!--? `\n# ${displayName}\n` ?-->
-
+<!--? `# ${displayName}` ?-->
 # Polyestr MDon Test
-
 <!--?!-->
 
-<!--? `\n${description}\n` ?-->
-
+<!--? `${description}` ?-->
 Test package for the stupid simple inline markdown fields used by the Polyestr application framework.
-
 <!--?!-->
 
 <!--? ?-->
@@ -36,8 +30,7 @@ MDon is still in it's infancy so you will have to install it from [gist][mdon-gi
 
 <!--?!-->
 
-<!--? `\n### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?-->
-
+<!--? `### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?-->
 ### Concepts
 
 > *Fragments*
@@ -113,5 +106,5 @@ unintended mishaps.
 [asset-1]: ../../assets/logo.svg
 
 ---
-Last Updated: Friday, October 20, 2017, 8:47:12 PM UTC
+Last Updated: Monday, October 23, 2017, 11:52:05 AM UTC
 <!--?!-->

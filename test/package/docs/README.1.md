@@ -1,19 +1,19 @@
 ---
  title: README
 ---
-<? `\n![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]\n` ?>
+<? `![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]` ?>
 <?!>
 
-<? `\n# ${displayName}\n` ?>
+<? `# ${displayName}` ?>
 <?!>
 
-<? `\n${description}\n` ?>
+<? `${description}` ?>
 <?!>
 
 <? ?>
 <?!>
 
-<? `\n### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?>
+<? `### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?>
 <?!>
 
 <? ?>

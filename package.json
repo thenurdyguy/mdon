@@ -26,7 +26,8 @@
         "test-glob": "yarn run test-glob-md~ && yarn run test-glob-md",
         "test-yarn": "cd ./test/package; yarn test-yarn-md; cd ../../",
         "test": "yarn run test-md~ && yarn run test-md && yarn test-glob && yarn test-yarn",
-        "prepare": "yarn test && yarn md"
+        "build": "tsc",
+        "prepare": "yarn build && yarn test && yarn md"
     },
     "keywords": [
         "markdown",

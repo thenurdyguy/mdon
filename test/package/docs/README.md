@@ -1,19 +1,19 @@
 ---
  title: README
 ---
-<? `\n![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]\n` ?>
+<? `![${displayName} logo][${@alias(@exists('../../assets/logo.svg'), 'asset')}]` ?>
 
 ![Polyestr MDon Test logo][asset-1]
 
 <?!>
 
-<? `\n# ${displayName}\n` ?>
+<? `# ${displayName}` ?>
 
 # Polyestr MDon Test
 
 <?!>
 
-<? `\n${description}\n` ?>
+<? `${description}` ?>
 
 Test package for the stupid simple inline markdown fields used by the Polyestr application framework.
 
@@ -38,7 +38,7 @@ MDon is still in it's infancy so you will have to install it from [gist][mdon-gi
 
 <?!>
 
-<? `\n### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?>
+<? `### Concepts\n\n${@include('docs/MDON_CONCEPTS.md')}` ?>
 
 ### Concepts
 

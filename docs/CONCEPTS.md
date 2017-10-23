@@ -60,10 +60,18 @@ unintended mishaps.
 to separate source files from compiled files, which is not a requirement for
 MDon since it can recompile from compiled files but may still be a more robust
 setup in case something goes wrong. To opt in to this behaviour the first line
-of the target file needs to be begin with `<!--@path/to/source.md@-->`.
+of the target file needs to be begin with `<!--%path/to/source.md%-->`.
 >
 > So if you want your `./README.md` to compile from `./docs/README.md` then you
-can simply create a blank `./README.md` and set the first line to `<!--@docs/README.md-->`.
+can simply create a blank `./README.md` and set the first line to `<!--%docs/README.md%-->`.
+
+> **Safe Output by Default:**
+>
+> At the moment some package managers are working on fixes for misinterpretting
+syntax that should normally not be visible when rendering markdown content on
+their websites, so by default MDon will wrap fragments with `<!--…-->` in all
+files. In the future this will only be the default behaviour for files declaring
+a raw source like `<!--%docs/README.md%-->`.
 
 ## Gotchas
 
