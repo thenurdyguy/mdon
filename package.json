@@ -1,6 +1,6 @@
 {
     "name": "mdon",
-    "displayName": "Polyestr MDon",
+    "displayName": "MDon",
     "glyph": "ΨM",
     "version": "1.0.0-alpha.5",
     "description": "Stupid simple inline markdown fields used by the Polyestr application framework.",
