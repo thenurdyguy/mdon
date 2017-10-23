@@ -1,15 +1,10 @@
 /* CLI */
 
 (new class CLI extends Base {
-    private _args: string[];
-    get args() {
-        let i; return this._args = this._args || (i = argv.findIndex(arg => matchers.arg.test(arg))) > -1 && argv.slice(i + 1) || null;
-    }
-    bootstrap() {
-        if (!this.args) return;
+    bootstrap(args?: string[]) {
+        if (!args) return;
         const started = now();
-        const { args } = this,
-            options = { p: '', m: [], o: null, b: null },
+        const options = { p: '', m: [], o: null, b: null },
             push = (k, arg) => options[k].push ? options[k].push(arg) : options[k] = arg, // !options[k] || options[k] === true && (options[k] = arg),
             flagLike = /^(-\w|--\w+(\-\w+))/, pathLike = /[\.\\\/]/, fileLike = /\w+\.\w+$/, extLike = /^\.\w+$/;
         for (let i = 0, arg, k = ''; arg = args[i], i < args.length; i++) {
@@ -42,6 +37,6 @@
             }));
         }
 
-        this.log(` ${errored ? '!' : '√'} MDon${extname(module.filename)} processed ${processed} of ${files.length} in ${(now() - started).toFixed(1)} ms`);
+        this.log(` ${errored ? '!' : '√'} MDon processed ${processed} of ${files.length} in ${(now() - started).toFixed(1)} ms`);
     }
-}).bootstrap();
+}).bootstrap(matchers.arg.test(argv[1]) && argv.slice(2) || null);
