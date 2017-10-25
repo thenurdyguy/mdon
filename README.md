@@ -7,8 +7,8 @@
 ![MDon logo][asset-1]
 <!--?!-->
 
-<!--? `# ${displayName}` ?-->
-# MDon
+<!--? `# ${displayName} ${suffix}` ?-->
+# MDon (alpha)
 <!--?!-->
 
 <!--? `${description}` ?-->
@@ -242,6 +242,18 @@ unintended mishaps.
 
 ## Latest Perks
 
+> **Experimental YAML Frontmatter:**
+>
+> Starting from v1.0.0-alpha.7 you may use YAML frontmatter to add new variables
+that can be used in your interpolations. Since MDon follows a zero-dependency
+policy, this feature is entirly opt-in and can be enabled by simply including
+`js-yaml` in your dependencies, which MDon will use as optionalDependency. Once
+MDon finds this module it will start processing the YAML frontmatter, adding the
+defined properties to the document's context. If a raw source is used, MDon will
+first apply the metadata picked up from the raw source which may be overridden
+by ones in the actual document being compiled, while preserving the frontmatter
+in all documents to make the process 100% regeneratable.
+
 > **Experimental Relative Paths:**
 >
 > Starting from v1.0.0-alpha.6 you may use relative paths to any operation which
@@ -320,5 +332,5 @@ evolve to meet your practical needs.
 [asset-1]: https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg
 
 ---
-Last Updated: Monday, October 23, 2017, 9:52:10 PM UTC
+Last Updated: Wednesday, October 25, 2017, 2:26:18 PM UTC
 <!--?!-->
