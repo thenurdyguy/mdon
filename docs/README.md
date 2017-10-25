@@ -1,10 +1,10 @@
 ---
- title: README
+ suffix: ""
 ---
 <? `![${displayName} logo][${@alias('https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg', 'asset')}]` ?>
 <?!>
 
-<? `# ${displayName}` ?>
+<? `# ${displayName} ${suffix}` ?>
 <?!>
 
 <? `${description}` ?>

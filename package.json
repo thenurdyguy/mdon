@@ -29,7 +29,16 @@
         "test-package-api": "pushd ./test/package; yarn test-api; popd",
         "test": "yarn run test-md~ && yarn run test-md && yarn test-glob && yarn test-package",
         "build": "tsc",
-        "prepare": "yarn build && yarn test && yarn md"
+        "version": "mdon *.md && git add '*.md'",
+        "deploy": "np",
+        "prepublishOnly": "yarn build && yarn test && yarn md"
+    },
+    "devDependencies": {
+        "@types/node": "^8",
+        "np": "^2"
+    },
+    "optionalDependencies": {
+        "js-yaml": "^3"
     },
     "keywords": [
         "markdown",

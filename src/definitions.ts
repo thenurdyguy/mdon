@@ -1,15 +1,13 @@
-/* Imports */
+/* Settings */
+const defaults = { backup: false, safe: true, output: true }, // false returns output, '.suffix' writes to <name>.suffix.md
+    debugging: indexable<boolean | undefined> = '' as any;
+// { parse: true, fragments: false, sprint: true, output: true };
+
+/* Required Imports */
 const fs = require('fs'), path = require('path'),
-    { assign: define, entries: entriesOf, getPrototypeOf: prototypeOf, setPrototypeOf: setPrototype } = Object,
+    { assign: define, entries: entriesOf, getPrototypeOf, setPrototypeOf: setPrototype } = Object,
     { readFileSync, existsSync, writeFileSync, renameSync } = fs,
     { resolve, dirname, basename, relative, parse: parsePath, extname } = path;
-
-/* Settings */
-const defaults = {
-    backup: false, safe: true, output: true, // false returns output, '.suffix' writes to <name>.suffix.md
-}, debugging = (''
-    //, { parse: true, fragments: false, sprint: true, output: true }
-) as any as indexable<boolean | undefined>;
 
 /* Definitions */
 const [READ, PARSE, LINKS] = ['READ', 'PARSE', 'LINKS'].map(Symbol), // Symbol('MDon::Links'),
@@ -38,17 +36,27 @@ const [READ, PARSE, LINKS] = ['READ', 'PARSE', 'LINKS'].map(Symbol), // Symbol('
         hour: 'numeric', minute: '2-digit', second: '2-digit'
     };
 
+declare interface Guard<T = any> {
+    (value: T | any): T | undefined;
+    <T>(value: T | any): T | undefined;
+    <F>(value: T | any, fallback?: F): T | F;
+    <T, F>(value: T | any, fallback?: F): T | F;
+};
+
 /* Helpers */
 const
-    VOID = Object.create(null),
+    VOID = Object.seal(Object.create(null)),
     NOOP = ((() => VOID) as ((...args: any[]) => any)),
     ANY = (type: any) => type !== 'undefined',
+    prototypeOf = (value) => value === null || value === undefined ? undefined : getPrototypeOf(value),
     typeguard = (type: any, value: any, fallback: any) => typeof value === type ? value : fallback, // type.includes(typeof value)
     callable = typeguard.bind(null, 'function'),
     object = define(
-        typeguard.bind(null, 'object'),
+        typeguard.bind(null, 'object') as Guard<object>,
         {
-            flat: (value, fallback: any) => typeof value === 'object' && [Object.prototype, null].includes(prototypeOf(value)) ? value : fallback
+            flat: ((check = Array.prototype.includes.bind([null, Object.prototype])) =>
+                (value, fallback: any) => check(prototypeOf(value)) ? value : fallback
+            )() as (Guard<object>)
         }),
     boolean = typeguard.bind(null, 'boolean'),
     string = typeguard.bind(null, 'string'),
@@ -58,4 +66,27 @@ const
         callable(hrtime) && ((t = hrtime()) => t[0] * 1000 + t[1] / 1000000)
     ) || Date.now } = ANY(typeof performance) ? performance : VOID,
     bind = (object, ...methods: string[]) => { for (const method of methods) callable(object[method]) && (object[method] = object[method].bind(object)); },
+    reconcile = (
+        (a?: Reconcilable | any, ...fallback: (Reconcilable | any)[]) => {
+            try {
+                const ƒ = callable(a) || callable(object(a, VOID).try);
+                return ƒ && (!ƒ.name && ƒ.length === 0) ? ƒ() : a;
+            } catch (exception) {
+                return !callable(fallback[0]) ? fallback[0] : fallback.length === 1 ? reconcile(fallback[0]) : reconcile(...fallback);
+            }
+        }
+    ) as {
+            <T, U>(ƒ: Reconcilable<T>, fallback: Reconcilable<U>): T | U;
+            <T, U>(ƒ: Reconcilable<T>, fallback: U): T | U;
+            <T, U = Reconcilable | any>(ƒ: Reconcilable<T>, ...fallback: U[]): T | U;
+            <T = Reconcilable | any>(...values: T[]): T;
+        },
     normalizeAlias = value => string(matchers.alias.test(value) && value, '');
+
+declare interface Any { }
+declare interface Tryable<T = any> extends Any { (): T; name: undefined; length: 0; }
+declare type Reconcilable<T = any, ƒ extends Tryable = Tryable<T>> = (ƒ | { try: ƒ }) & Partial<ƒ & { try: ƒ }>;
+
+/* Optional Imports */
+
+const yaml = reconcile(() => require('js-yaml')) || VOID;

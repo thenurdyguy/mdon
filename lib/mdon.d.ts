@@ -1,4 +1,9 @@
 /// <reference types="node" />
+declare const defaults: {
+    backup: boolean;
+    safe: boolean;
+    output: boolean;
+}, debugging: indexable<boolean | undefined>;
 declare const fs: any, path: any, define: {
     <T, U>(target: T, source: U): T & U;
     <T, U, V>(target: T, source1: U, source2: V): T & U & V;
@@ -9,12 +14,7 @@ declare const fs: any, path: any, define: {
         [s: string]: T;
     }): [string, T][];
     (o: any): [string, any][];
-}, prototypeOf: (o: any) => any, setPrototype: (o: any, proto: object) => any, readFileSync: any, existsSync: any, writeFileSync: any, renameSync: any, resolve: any, dirname: any, basename: any, relative: any, parsePath: any, extname: any;
-declare const defaults: {
-    backup: boolean;
-    safe: boolean;
-    output: boolean;
-}, debugging: indexable<boolean>;
+}, getPrototypeOf: (o: any) => any, setPrototype: (o: any, proto: object) => any, readFileSync: any, existsSync: any, writeFileSync: any, renameSync: any, resolve: any, dirname: any, basename: any, relative: any, parsePath: any, extname: any;
 declare const READ: symbol, PARSE: symbol, LINKS: symbol, matchers: {
     alias: RegExp;
     interpolations: RegExp;
@@ -44,7 +44,28 @@ declare const READ: symbol, PARSE: symbol, LINKS: symbol, matchers: {
 }, timestamp: Intl.DateTimeFormatOptions & {
     locale?: string;
 };
-declare const VOID: any, NOOP: (...args: any[]) => any, ANY: (type: any) => boolean, typeguard: (type: any, value: any, fallback: any) => any, callable: any, object: any, boolean: any, string: any, stdout: any, argv: any[], hrtime: any, columns: number, now: (t?: any) => number, bind: (object: any, ...methods: string[]) => void, normalizeAlias: (value: any) => any;
+interface Guard<T = any> {
+    (value: T | any): T | undefined;
+    <T>(value: T | any): T | undefined;
+    <F>(value: T | any, fallback?: F): T | F;
+    <T, F>(value: T | any, fallback?: F): T | F;
+}
+declare const VOID: any, NOOP: (...args: any[]) => any, ANY: (type: any) => boolean, prototypeOf: (value: any) => any, typeguard: (type: any, value: any, fallback: any) => any, callable: any, object: Guard<object> & {
+    flat: Guard<object>;
+}, boolean: any, string: any, stdout: any, argv: any[], hrtime: any, columns: number, now: (t?: any) => number, bind: (object: any, ...methods: string[]) => void, reconcile: any, normalizeAlias: (value: any) => any;
+interface Any {
+}
+interface Tryable<T = any> extends Any {
+    (): T;
+    name: undefined;
+    length: 0;
+}
+declare type Reconcilable<T = any, ƒ extends Tryable = Tryable<T>> = (ƒ | {
+    try: ƒ;
+}) & Partial<ƒ & {
+    try: ƒ;
+}>;
+declare const yaml: any;
 declare class Macro extends Function {
     directive: string;
     constructor(directive: string);

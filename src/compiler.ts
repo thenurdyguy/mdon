@@ -30,7 +30,8 @@ class Compiler extends Base {
             if (!directive) push(fragment);
             else if (directive === '!') push('\n');
             else try { // const parts: indexable<any> = { fragment, directive, body, rest };
-                push(this.format({ directive, body: `\n${new Macro(directive)(context)}\n` })); // parts.result =
+                const result = new Macro(directive)(context);
+                push(root ? this.format({ directive, body: `\n${result}\n` }) : result); // parts.result =
             } catch (exception) {
                 problems.push({ fragment, directive, body, rest, exception, index: i });
                 push(this.format({ directive, exception })); // parts.result =
