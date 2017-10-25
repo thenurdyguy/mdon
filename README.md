@@ -1,3 +1,6 @@
+<!---
+    suffix: (alpha)
+--->
 <!--%docs/README.md%-->
 <!--	*** THIS FILE IS DYNAMICALLY GENERATED ***	-->
 <!--? `![${displayName} logo][${@alias('https://cdn.rawgit.com/polyestr/mdon/master/assets/logo.svg', 'asset')}]` ?-->
