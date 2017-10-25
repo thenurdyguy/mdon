@@ -5,16 +5,10 @@
 <!--?!-->
 <!--? `${@include('./changelog/v1.0.0.md')}` ?-->
 ## v1.0.0
-
-### alpha.7 [public] — October 25, 2017
-* Improve helpers and definitions (Guard<T>)
-* Add reconcile helper (try: ƒ, fallback)
-* Fix broken fragments when @include has markup by stripping markup
-* Add opt-in YAML processing support
-* Patch substitutes prepare package script with prepublishOnly
-* Add Np for publishing
-
+<!--? `${@include('./v1.0.0/alpha.6.md')}` ?-->
+<!--? `### ${document.name} [public] — October 23, 2017` ?-->
 ### alpha.6 [public] — October 23, 2017
+<!--?!-->
 
 **Breaking Changes:** This release introduces drastic changes.
 
@@ -52,38 +46,54 @@
 * Add CHANGELOG using $include with relative paths
 * Updated README using $include with relative paths
 * Update docs using latest MDon markup
-
+<!--?!-->
+<!--? `${@include('./v1.0.0/alpha.5.md')}` ?-->
+<!--? `### ${document.name} [public] — October 20, 2017` ?-->
 ### alpha.5 [public] — October 20, 2017
+<!--?!-->
 * Add manually created lib/index.d.ts types
 * Update docs using latest MDon markup
 * Add keywords/topics to package and repository
-
+<!--?!-->
+<!--? `${@include('./v1.0.0/alpha.4.md')}` ?-->
+<!--? `### ${document.name} [public] — October 19, 2017` ?-->
 ### alpha.4 [public] — October 19, 2017
+<!--?!-->
 * Remove unused files
 * Update docs using latest MDon markup
-
+<!--?!-->
+<!--? `${@include('./v1.0.0/alpha.3.md')}` ?-->
+<!--? `### ${document.name} [public] — October 19, 2017` ?-->
 ### alpha.3 [public] — October 19, 2017
+<!--?!-->
 * Refactor to use classes (preparing for modularization)
 * Implement HTML Comment wrapping with rounttrip parsing
-* Add safe-wrapping `<!--?…?-->` to work with yarn's rendering
+* Add safe-wrapping <!--?…?--> to work with yarn's rendering
 * Implement rawpath strategy which always uses safe-wrapping to render fragment-free output (when viewed on github/npm/yarn)
 * Add YAML compatibility & Improve file resolution and console output
 * Fix issue where YAML frontmatter was included in safe output mode
 * Update docs using latest MDon markup
-
+<!--?!-->
+<!--? `${@include('./v1.0.0/alpha.2.md')}` ?-->
+<!--? `### ${document.name} [not public] — October 16, 2017` ?-->
 ### alpha.2 [not public] — October 16, 2017
+<!--?!-->
 * Refactor mdon helpers
 * Update docs using latest MDon markup
-
+<!--?!-->
+<!--? `${@include('./v1.0.0/alpha.1.md')}` ?-->
+<!--? `### ${document.name} [not public] — October 19, 2017` ?-->
 ### alpha.1 [not public] — October 19, 2017
+<!--?!-->
 * Implement mdon as vanilla js & mjs node modules
 * Add docs using first mdon notation
 * Add test/package with simple very simple (manually verified) api test
 * Update docs using latest MDon markup
 <!--?!-->
+<!--?!-->
 
 <!--?!?-->
 
 ---
-Last Updated: Wednesday, October 25, 2017, 2:26:18 PM UTC
+Last Updated: Monday, October 23, 2017, 9:52:10 PM UTC
 <!--?!-->

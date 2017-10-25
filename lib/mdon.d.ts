@@ -66,6 +66,7 @@ declare type Reconcilable<T = any, ƒ extends Tryable = Tryable<T>> = (ƒ | {
     try: ƒ;
 }>;
 declare const yaml: any;
+
 declare class Macro extends Function {
     directive: string;
     constructor(directive: string);
@@ -93,7 +94,7 @@ declare class Context extends Base {
     readonly cwd: any;
     constructor(properties: object, path: string);
     wrap(wrapper?: object): any;
-    $timestamp(date?: string | number | Date, {locale, ...options}?: indexable<any>): string;
+    $timestamp(date?: string | number | Date, { locale, ...options }?: indexable<any>): string;
     $format(string: string): string;
     $resolve(path: string, base?: boolean | string): string;
     $exists(path: string): string;
@@ -109,7 +110,7 @@ declare class Package extends Base {
     constructor(path?: string);
     read(filename: string): any;
     readUntil(file: string | number, until?: RegExp, length?: number, position?: number, contents?: string, buffer?: Buffer): any;
-    write(filename: string, contents: string, {flag, backup, ...options}?: {
+    write(filename: string, contents: string, { flag, backup, ...options }?: {
         flag?: string;
         backup?: boolean;
     }): any;
