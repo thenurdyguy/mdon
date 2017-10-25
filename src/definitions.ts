@@ -86,3 +86,7 @@ const
 declare interface Any { }
 declare interface Tryable<T = any> extends Any { (): T; name: undefined; length: 0; }
 declare type Reconcilable<T = any, ƒ extends Tryable = Tryable<T>> = (ƒ | { try: ƒ }) & Partial<ƒ & { try: ƒ }>;
+
+/* Optional Imports */
+
+const yaml = reconcile(() => require('js-yaml')) || VOID;

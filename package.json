@@ -30,6 +30,11 @@
         "test": "yarn run test-md~ && yarn run test-md && yarn test-glob && yarn test-package",
         "build": "tsc",
         "prepare": "yarn build && yarn test && yarn md"
+    "devDependencies": {
+        "@types/node": "^8"
+    },
+    "optionalDependencies": {
+        "js-yaml": "^3"
     },
     "keywords": [
         "markdown",
