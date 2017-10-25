@@ -66,4 +66,23 @@ const
         callable(hrtime) && ((t = hrtime()) => t[0] * 1000 + t[1] / 1000000)
     ) || Date.now } = ANY(typeof performance) ? performance : VOID,
     bind = (object, ...methods: string[]) => { for (const method of methods) callable(object[method]) && (object[method] = object[method].bind(object)); },
+    reconcile = (
+        (a?: Reconcilable | any, ...fallback: (Reconcilable | any)[]) => {
+            try {
+                const ƒ = callable(a) || callable(object(a, VOID).try);
+                return ƒ && (!ƒ.name && ƒ.length === 0) ? ƒ() : a;
+            } catch (exception) {
+                return !callable(fallback[0]) ? fallback[0] : fallback.length === 1 ? reconcile(fallback[0]) : reconcile(...fallback);
+            }
+        }
+    ) as {
+            <T, U>(ƒ: Reconcilable<T>, fallback: Reconcilable<U>): T | U;
+            <T, U>(ƒ: Reconcilable<T>, fallback: U): T | U;
+            <T, U = Reconcilable | any>(ƒ: Reconcilable<T>, ...fallback: U[]): T | U;
+            <T = Reconcilable | any>(...values: T[]): T;
+        },
     normalizeAlias = value => string(matchers.alias.test(value) && value, '');
+
+declare interface Any { }
+declare interface Tryable<T = any> extends Any { (): T; name: undefined; length: 0; }
+declare type Reconcilable<T = any, ƒ extends Tryable = Tryable<T>> = (ƒ | { try: ƒ }) & Partial<ƒ & { try: ƒ }>;
